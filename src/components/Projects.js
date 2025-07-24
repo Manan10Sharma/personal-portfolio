@@ -22,7 +22,7 @@ export const Projects = () => {
       imgUrl: projImg2,
     },
     {
-      title: "FoodFrenzy – Online Food Delivery Platform",
+      title: "CravZ – Online Food Delivery Platform",
       description: "Java Full Stack | Spring Boot | Thymeleaf | MySQL | Spring Security -- Developed a full-stack food delivery platform with secure user/admin features",
       imgUrl: projImg3,
     },

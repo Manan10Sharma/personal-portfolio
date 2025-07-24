@@ -51,8 +51,8 @@ export const NavBar = () => {
             <span className="navbar-text">
               <div className="social-icon">
                 <a href="https://www.linkedin.com/in/manan-sharma-7a827220a/"><img src={navIcon1} alt="Icon" /></a>
-              <a href="https://github.com/Manan10Sharma?tab=repositories"><img src={navIcon4} alt="Icon" /></a>
-              <a href="https://www.instagram.com/manansharma2002/"><img src={navIcon3} alt="Icon" /></a>
+                <a href="https://github.com/Manan10Sharma"><img src={navIcon4} alt="Icon" /></a>
+                <a href="https://www.instagram.com/manansharma2002/"><img src={navIcon3} alt="Icon" /></a>
               </div>
               <HashLink to='#connect'>
                 <button className="vvd"><span>Let’s Connect</span></button>
