@@ -23,8 +23,9 @@
     --text-muted: #B8B8B8;
     --gradient-start: #AA367C;
     --gradient-end: #4A2FBD;
-    --card-bg-light: rgba(255, 255, 255, 0.05);
+    --card-bg-light: rgba(255, 255, 255, 0.08); /* Slightly more prominent background */
     --border-light: rgba(255, 255, 255, 0.5);
+    --transition-speed: 0.4s; /* Consistent transition speed */
 }
 
 * {
@@ -41,7 +42,7 @@ html {
 
 body {
   font-weight: 400;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Prevent horizontal scroll */
   position: relative;
   background-color: var(--bg-dark) !important;
   color: var(--text-light) !important;
@@ -69,18 +70,20 @@ a:hover {
 img {
   width: 100%;
   height: auto;
+  display: block; /* Remove extra space below images */
 }
 
 button {
   border: 0;
   background-color: transparent;
-  cursor: pointer; /* Add cursor pointer for buttons */
+  cursor: pointer;
 }
 
 input:focus, textarea:focus, select:focus {
   outline: none;
 }
 
+/* Custom container padding for wider screens */
 @media (min-width:1700px) {
   main .container {
     max-width: 100%;
@@ -98,71 +101,82 @@ p.danger {
 
 /************ Navbar Css ************/
 nav.navbar {
-  padding: 1.125rem 0; /* 18px / 16px = 1.125rem */
+  padding: 1.125rem 0; /* 18px */
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 9999;
-  transition: 0.32s ease-in-out;
+  transition: var(--transition-speed) ease-in-out;
 }
 nav.navbar.scrolled {
-  padding: 0.5rem 0; /* Adjusted for scrolled state */
+  padding: 0.75rem 0; /* Adjusted for scrolled state */
   background-color: var(--bg-dark);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow when scrolled */
 }
 nav.navbar a.navbar-brand {
-    width: auto; /* Let image determine initial width */
-    max-width: 90px; /* Max width for logo */
+    width: auto;
+    max-width: 90px;
     height: auto;
+    display: flex; /* For better alignment if logo is more complex */
+    align-items: center;
 }
 nav.navbar .navbar-nav .nav-link.navbar-link {
   font-weight: 400;
   color: var(--text-light) !important;
-  letter-spacing: 0.05em; /* 0.8px / 16px = 0.05em */
-  padding: 0 1.5625rem; /* 25px / 16px = 1.5625rem */
-  font-size: 1.125rem; /* 18px / 16px = 1.125rem */
-  opacity: 0.75;
+  letter-spacing: 0.05em;
+  padding: 0 1.25rem; /* 20px - slightly reduced for more links */
+  font-size: 1.05rem; /* Slightly smaller for more compact nav */
+  opacity: 0.8;
+  transition: opacity var(--transition-speed);
 }
 nav.navbar .navbar-nav a.nav-link.navbar-link:hover,
 nav.navbar .navbar-nav a.nav-link.navbar-link.active {
     opacity: 1;
+    font-weight: 500; /* Bold on active/hover */
 }
 span.navbar-text {
     display: flex;
     align-items: center;
 }
 .social-icon {
-    display: inline-block;
-    margin-left: 0.875rem; /* 14px */
+    display: inline-flex; /* Use flex for direct alignment */
+    align-items: center;
+    margin-left: 1rem; /* 16px */
+    gap: 0.5rem; /* Space between icons */
 }
 .social-icon a {
-    width: 2.625rem; /* 42px */
-    height: 2.625rem; /* 42px */
+    width: 2.5rem; /* 40px */
+    height: 2.5rem; /* 40px */
     background: rgba(217, 217, 217, 0.1);
     display: inline-flex;
     border-radius: 50%;
-    margin-right: 0.375rem; /* 6px */
     align-items: center;
     justify-content: center;
     line-height: 1;
     border: 1px solid var(--border-light);
+    position: relative;
+    overflow: hidden; /* For pseudo-element effect */
 }
 .social-icon a::before {
     content: "";
-    width: 2.625rem;
-    height: 2.625rem;
+    width: 100%;
+    height: 100%;
     position: absolute;
     background-color: var(--text-light);
     border-radius: 50%;
     transform: scale(0);
-    transition: 0.3s ease-in-out;
+    transition: var(--transition-speed) ease-in-out;
+    z-index: 0; /* Behind the image */
 }
 .social-icon a:hover::before {
     transform: scale(1);
 }
 .social-icon a img {
-  width: 40%;
+  width: 50%; /* Adjusted for better visibility */
+  height: 50%;
+  object-fit: contain;
   z-index: 1;
-  transition: 0.3s ease-in-out;
+  transition: var(--transition-speed) ease-in-out;
 }
 .social-icon a:hover img {
   filter: brightness(0) saturate(100%) invert(0%) sepia(7%) saturate(98%) hue-rotate(346deg) brightness(95%) contrast(86%);
@@ -171,15 +185,17 @@ span.navbar-text {
   font-weight: 700;
   color: var(--text-light);
   border: 1px solid var(--text-light);
-  padding: 1.125rem 2.125rem; /* 18px 34px */
-  font-size: 1.125rem; /* 18px */
-  margin-left: 1.125rem; /* 18px */
+  padding: 0.9rem 1.8rem; /* Adjusted padding */
+  font-size: 1rem; /* Adjusted font size */
+  margin-left: 1.5rem; /* 24px */
   position: relative;
   background-color: transparent;
-  transition: 0.3s ease-in-out;
+  transition: var(--transition-speed) ease-in-out;
+  border-radius: 0.5rem; /* Slightly rounded corners */
 }
 .navbar-text button span {
   z-index: 1;
+  position: relative; /* Ensure span is above pseudo-element */
 }
 .navbar-text button::before {
   content: "";
@@ -190,30 +206,28 @@ span.navbar-text {
   left: 0;
   top: 0;
   z-index: -1;
-  transition: 0.3s ease-in-out;
+  transition: var(--transition-speed) ease-in-out;
+  border-radius: 0.5rem; /* Match button border-radius */
 }
 .navbar-text button:hover {
   color: var(--bg-dark);
 }
 .navbar-text button:hover::before {
-  content: "";
   width: 100%;
-  height: 100%;
-  position: absolute;
 }
 nav.navbar .navbar-toggler:active,
 nav.navbar .navbar-toggler:focus {
   outline: none;
-    box-shadow: none;
+  box-shadow: none;
 }
 nav.navbar .navbar-toggler-icon {
-  width: 1.5rem; /* 24px */
-  height: 1.0625rem; /* 17px */
+  width: 1.5rem;
+  height: 1.0625rem;
   background-image: none;
   position: relative;
   border-bottom: 2px solid var(--text-light);
   transition: all 300ms linear;
-  top: -0.125rem; /* -2px */
+  top: -0.125rem;
 }
 nav.navbar .navbar-toggler-icon:focus {
   border-bottom: 2px solid var(--text-light);
@@ -231,7 +245,7 @@ nav.navbar .navbar-toggler-icon:before {
   transition: all 300ms linear;
 }
 nav.navbar .navbar-toggler-icon:after {
-  top: 0.5rem; /* 8px */
+  top: 0.5rem;
 }
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
   transform: rotate(45deg);
@@ -239,7 +253,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
   height: 2px;
 }
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
-  transform: translateY(0.5rem) rotate(-45deg); /* 8px */
+  transform: translateY(0.5rem) rotate(-45deg);
   background-color: var(--text-light);
   height: 2px;
 }
@@ -255,6 +269,9 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex; /* Use flexbox for vertical centering */
+  align-items: center; /* Center content vertically */
+  min-height: 100vh; /* Full viewport height */
 }
 .banner .tagline {
   font-weight: 700;
@@ -265,12 +282,13 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   font-size: 1.25rem; /* 20px */
   margin-bottom: 1rem; /* 16px */
   display: inline-block;
+  border-radius: 0.3rem; /* Small border-radius for modern look */
 }
 .banner h1 {
   font-size: 4.0625rem; /* 65px */
   font-weight: 700;
   letter-spacing: 0.05em;
-  line-height: 1.1; /* Adjusted for better appearance */
+  line-height: 1.1;
   margin-bottom: 1.25rem; /* 20px */
   display: block;
 }
@@ -278,44 +296,40 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   color: var(--text-muted);
   font-size: 1.125rem; /* 18px */
   letter-spacing: 0.05em;
-  line-height: 1.6em; /* Slightly increased for readability */
-  max-width: 50rem; /* Limiting width for readability on large screens */
-  margin: 0 auto 1.25rem auto; /* Center and add bottom margin */
+  line-height: 1.6em;
+  max-width: 50rem;
+  margin: 0 auto 1.25rem auto;
 }
-.banner ul { /* Added styling for list in banner */
-    list-style: none; /* Remove default list bullets */
-    padding: 0;
-    margin: 0 auto 1.25rem auto; /* Center and add bottom margin */
-    max-width: 50rem;
-}
-.banner ul p { /* Targeting paragraphs inside the list */
-    font-size: 1.125rem;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-    line-height: 1.6em;
-    margin-bottom: 0.8rem; /* Space between list items/paragraphs */
-    width: 100%; /* Ensure paragraphs inside ul take full width */
-}
+
 .banner button {
   color: var(--text-light);
   font-weight: 700;
   font-size: 1.25rem; /* 20px */
   margin-top: 3.75rem; /* 60px */
   letter-spacing: 0.05em;
-  display: flex;
+  display: inline-flex; /* Changed to inline-flex */
   align-items: center;
+  padding: 0.75rem 1.5rem; /* Added padding to button */
+  border-radius: 0.5rem; /* Match button border-radius */
+  border: 1px solid var(--text-light);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+.banner button:hover {
+    background-color: var(--text-light);
+    color: var(--bg-dark);
 }
 .banner button svg {
-  font-size: 1.5625rem; /* 25px */
-  margin-left: 0.625rem; /* 10px */
-  transition: 0.3s ease-in-out;
+  font-size: 1.5625rem;
+  margin-left: 0.625rem;
+  transition: margin-left var(--transition-speed) ease-in-out;
   line-height: 1;
 }
 .banner button:hover svg {
-  margin-left: 1.5625rem; /* 25px */
+  margin-left: 1.5625rem;
 }
 .banner img {
   animation: updown 3s linear infinite;
+  transform-origin: center center; /* Ensure consistent animation */
 }
 @keyframes updown {
     0% {
@@ -334,77 +348,87 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 /************ Skills Css ************/
 .skill {
-  padding: 0 0 3.125rem 0; /* 50px */
+  padding: 0 0 5rem 0; /* 80px bottom padding */
   position: relative;
+  overflow: hidden; /* For background images */
 }
 .skill-bx {
   background: #151515;
-  border-radius: 4rem; /* 64px */
+  border-radius: 4rem;
   text-align: center;
   padding: 3.75rem 3.125rem; /* 60px 50px */
   margin-top: -3.75rem; /* -60px */
+  position: relative; /* For z-index over background images */
+  z-index: 1;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); /* Soft shadow */
 }
 .skill h2 {
   font-size: 2.8125rem; /* 45px */
   font-weight: 700;
+  margin-bottom: 1rem;
 }
 .skill p {
     color: var(--text-muted);
     font-size: 1.125rem; /* 18px */
     letter-spacing: 0.05em;
-    line-height: 1.5em;
+    line-height: 1.6em; /* Adjusted for better readability */
     margin: 0.875rem auto 4.6875rem auto; /* 14px 75px, centered */
-    max-width: 56rem; /* Limit width for readability */
+    max-width: 56rem;
 }
 
-/* New styles for the skill list display (used also for certificates/achievements) */
 .skill-list-container {
-    display: grid; /* Use CSS Grid for better control */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns, min 200px wide */
-    gap: 1.875rem; /* 30px, Consistent gap between items */
-    margin-top: 3.125rem; /* 50px, Space from the description text */
-    justify-content: center; /* Center grid items horizontally */
-    align-items: stretch; /* Ensure items stretch to fill height */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+    gap: 1.875rem;
+    margin-top: 3.125rem;
+    justify-content: center;
+    align-items: stretch;
 }
 
 .skill-item {
-    padding: 1.25rem; /* 20px */
-    background: var(--card-bg-light); /* A subtle background for each skill item */
-    border-radius: 0.9375rem; /* 15px */
+    padding: 1.5rem; /* Slightly more padding */
+    background: var(--card-bg-light);
+    border-radius: 0.9375rem;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 8.75rem; /* Example minimum height for uniform cards */
-    transition: transform 0.3s ease; /* Smooth hover effect */
+    min-height: 9rem; /* Slightly increased min-height for uniformity */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    border: 1px solid transparent; /* Prepare for subtle border on hover */
 }
 
 .skill-item:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
+    transform: translateY(-8px); /* More pronounced lift effect */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+    border-color: var(--gradient-start); /* Highlight border on hover */
 }
 
-.skill-item .skill-percentage { /* Kept for specific use in achievements/certs for 'value' */
-    font-size: 2.5rem; /* 40px */
+.skill-item .achievement-title,
+.skill-item .certificate-title {
+    font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 0.625rem; /* 10px */
+    margin-bottom: 0.625rem;
     background: linear-gradient(90.21deg, var(--gradient-start) -5.91%, var(--gradient-end) 111.58%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    color: transparent;
+    color: transparent; /* Fallback for older browsers */
+    line-height: 1.2; /* Better line height for titles */
+    text-align: center;
 }
 
 .skill-item h5 {
-    font-size: 1.375rem; /* 22px */
+    font-size: 1.375rem;
     font-weight: 500;
     color: var(--text-light);
     line-height: 1.4;
-    text-align: center; /* Ensure text is centered */
-    flex-grow: 1; /* Allow h5 to take available space */
-    display: flex; /* Use flexbox to center content vertically */
-    align-items: center; /* Center text vertically */
-    justify-content: center; /* Center text horizontally */
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .background-image-left {
@@ -412,93 +436,120 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   position: absolute;
   bottom: 0;
   width: 40%;
-  z-index: -4;
+  z-index: 0; /* Ensures it's behind skill-bx */
+  opacity: 0.6; /* Slightly fade */
 }
 
 /************ Projects, Certifications, Achievements Common CSS ************/
-.project { /* Reused for Projects, Certifications, Achievements */
-  padding: 5rem 0; /* 80px */
+.project {
+  padding: 5rem 0;
   position: relative;
   background-color: var(--bg-dark);
+  overflow: hidden; /* For background images */
 }
-.project h2 { /* Main section heading */
-  font-size: 2.8125rem; /* 45px */
+.project h2 {
+  font-size: 2.8125rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 1.25rem; /* 20px */
+  margin-bottom: 1.5rem; /* Increased margin */
 }
 
 /* Specific styling for ProjectCard components */
 .proj-imgbx {
   position: relative;
-  border-radius: 1.875rem; /* 30px */
+  border-radius: 1.875rem;
   overflow: hidden;
-  margin-bottom: 1.5rem; /* 24px */
+  margin-bottom: 1.5rem;
+  background-color: var(--card-bg-light); /* Background for the card itself */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Soft shadow for cards */
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease; /* Add transition for hover */
+  display: flex; /* Use flexbox for image and text layout */
+  flex-direction: column; /* Stack image and text */
 }
+
+.proj-imgbx:hover {
+    transform: translateY(-8px); /* Lift effect on hover */
+    box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.4);
+}
+
 .proj-imgbx img {
-    height: 12.5rem; /* Fixed height for project images */
-    object-fit: cover; /* Ensures images cover the area without distortion */
+    height: 12rem; /* Adjusted for better proportion */
+    object-fit: cover;
     width: 100%;
-    display: block; /* Remove extra space below image */
+    border-top-left-radius: 1.875rem; /* Match parent radius */
+    border-top-right-radius: 1.875rem;
 }
+
 .proj-imgbx::before {
   content: "";
   background: linear-gradient(90.21deg, var(--gradient-start) -5.91%, var(--gradient-end) 111.58%);
-  opacity: 0.85;
+  opacity: 0.7; /* Slightly less opaque */
   position: absolute;
   width: 100%;
-  height: 0;
-  transition: 0.4s ease-in-out;
+  height: 12rem; /* Same height as image */
+  top: 0;
+  left: 0;
+  transition: opacity var(--transition-speed) ease;
+  z-index: 1; /* Above image */
+  border-top-left-radius: 1.875rem; /* Match parent radius */
+  border-top-right-radius: 1.875rem;
 }
+/* No change on hover for the overlay, as text is now visible */
 .proj-imgbx:hover::before {
-  height: 100%;
+    opacity: 0.9; /* Slight increase in opacity on hover */
 }
+
+/* Project text is now visible by default */
 .proj-txtx {
-  position: absolute;
+  position: relative; /* Changed to relative */
   text-align: center;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: 0.5s ease-in-out;
-  opacity: 0;
+  padding: 1rem 1.5rem 1.5rem; /* Padding adjusted */
+  opacity: 1; /* Always visible */
+  transition: opacity var(--transition-speed) ease; /* Still keep transition for consistency */
   width: 100%;
-  padding: 0 1rem; /* Add some padding */
+  z-index: 2; /* Above the overlay if needed */
+  background-color: transparent; /* Text background comes from .proj-imgbx */
+  flex-grow: 1; /* Allows it to take remaining space */
 }
+
+/* No change on hover for text opacity, it's always 1 */
 .proj-imgbx:hover .proj-txtx {
-  top: 50%;
   opacity: 1;
 }
+
 .proj-txtx h4 {
-  font-size: 1.875rem; /* 30px */
+  font-size: 1.7rem; /* Slightly smaller for better fit */
   font-weight: 700;
   letter-spacing: 0.05em;
-  line-height: 1.2; /* Adjusted */
-  margin-bottom: 0.5rem; /* Space below title */
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  color: var(--text-light); /* Ensure title color is consistent */
 }
 .proj-txtx span {
   font-style: italic;
   font-weight: 400;
-  font-size: 0.9375rem; /* 15px */
+  font-size: 0.9rem; /* Slightly smaller description */
   letter-spacing: 0.05em;
-  display: block; /* Ensure span takes full width */
-  max-height: 4.5rem; /* Example: Limit description height */
-  overflow-y: auto; /* Enable scrolling for long descriptions */
-  padding-right: 5px; /* Space for scrollbar */
+  display: block;
+  max-height: 6rem; /* Increased max-height for more text */
+  overflow-y: auto;
+  padding-right: 5px;
+  color: var(--text-muted); /* Description text color */
 }
 /* Scrollbar styling for proj-txtx span (Webkit browsers) */
 .proj-txtx span::-webkit-scrollbar {
     width: 8px;
 }
 .proj-txtx span::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05); /* Lighter track */
     border-radius: 10px;
 }
 .proj-txtx span::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2); /* Lighter thumb */
     border-radius: 10px;
 }
 .proj-txtx span::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.4);
 }
 
 
@@ -508,7 +559,8 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   bottom: 0;
   width: 35%;
   right: 0;
-  z-index: -4;
+  z-index: 0; /* Behind other content */
+  opacity: 0.6; /* Slightly fade */
 }
 
 /* For consistent paragraph styling under headings in new sections */
@@ -516,120 +568,135 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   color: var(--text-muted);
   font-size: 1.125rem; /* 18px */
   letter-spacing: 0.05em;
-  line-height: 1.6em; /* Slightly increased for readability */
-  margin: 0.875rem auto 1.875rem auto; /* 14px 30px, centered */
-  max-width: 50rem; /* Limiting width for readability on large screens */
+  line-height: 1.6em;
+  margin: 0.875rem auto 2.5rem auto; /* 14px 40px, centered */
+  max-width: 50rem;
   text-align: center;
 }
 
 /************ Services (Experience) Css ************/
 .services {
-    padding: 5rem 0; /* 80px */
+    padding: 5rem 0;
     position: relative;
     background-color: var(--bg-dark);
+    overflow: hidden;
+}
+
+.services h2 { /* Consistent with other section headings */
+    font-size: 2.8125rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 .experience-list {
-    margin-top: 3.125rem; /* 50px */
+    margin-top: 3.125rem;
 }
 
 .experience-item {
     background: var(--card-bg-light);
-    border-radius: 0.9375rem; /* 15px */
-    padding: 1.875rem; /* 30px */
-    margin-bottom: 1.875rem; /* 30px space between entries */
+    border-radius: 0.9375rem;
+    padding: 1.875rem;
+    margin-bottom: 1.875rem;
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    align-items: flex-start; /* Align content at the top */
-    transition: transform 0.3s ease; /* Smooth hover effect */
+    flex-wrap: wrap;
+    align-items: flex-start;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    border: 1px solid transparent;
 }
 
 .experience-item:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
+    transform: translateY(-8px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+    border-color: var(--gradient-start);
 }
 
 .experience-info {
-    flex: 0 0 33.333%; /* 1/3 width on larger screens */
+    flex: 0 0 33.333%;
     max-width: 33.333%;
-    padding-right: 1.5rem; /* Space between info and responsibilities */
-    word-break: break-word; /* Prevents long words from overflowing */
+    padding-right: 1.5rem;
+    word-break: break-word;
 }
 
 .experience-info h3 {
-    font-size: 1.625rem; /* 26px, company name */
+    font-size: 1.625rem;
     font-weight: 700;
-    margin-bottom: 0.5rem; /* 8px */
+    margin-bottom: 0.5rem;
     color: var(--text-light);
 }
 
 .experience-info h4 {
-    font-size: 1.25rem; /* 20px, job title */
+    font-size: 1.25rem;
     font-weight: 500;
-    margin-bottom: 0.5rem; /* 8px */
-    color: var(--gradient-start); /* Highlight job title */
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90.21deg, var(--gradient-start) -5.91%, var(--gradient-end) 111.58%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
 }
 
 .experience-info .duration,
 .experience-info .location {
-    font-size: 0.9375rem; /* 15px */
+    font-size: 0.9375rem;
     color: var(--text-muted);
-    margin-bottom: 0.25rem; /* 4px */
+    margin-bottom: 0.25rem;
 }
 
 .experience-responsibilities {
-    flex: 0 0 66.666%; /* 2/3 width on larger screens */
+    flex: 0 0 66.666%;
     max-width: 66.666%;
-    padding-left: 1.5rem; /* Space between info and responsibilities */
-    border-left: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
+    padding-left: 1.5rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .experience-responsibilities ul {
-    list-style: disc; /* Use discs for list items */
-    margin-left: 1.25rem; /* Indent list */
+    list-style: disc;
+    margin-left: 1.25rem;
     padding: 0;
 }
 
 .experience-responsibilities li {
-    font-size: 1rem; /* 16px */
+    font-size: 1rem;
     color: var(--text-light);
-    margin-bottom: 0.5rem; /* 8px space between list items */
-    line-height: 1.6; /* Improved readability */
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
 }
 .experience-responsibilities li:last-child {
     margin-bottom: 0;
 }
 
-@media (max-width: 992px) { /* Tablets and smaller desktops */
+@media (max-width: 992px) {
     .experience-info,
     .experience-responsibilities {
-        flex: 0 0 100%; /* Stack columns */
+        flex: 0 0 100%;
         max-width: 100%;
         padding-left: 0;
         padding-right: 0;
-        border-left: none; /* Remove border when stacked */
+        border-left: none;
     }
     .experience-info {
-        margin-bottom: 1rem; /* Space between info and responsibilities when stacked */
-        text-align: center; /* Center info text */
+        margin-bottom: 1rem;
+        text-align: center;
     }
     .experience-responsibilities ul {
-        margin-left: 0; /* Remove indent when stacked */
+        margin-left: 0;
         text-align: left;
-        list-style-position: inside; /* Keeps bullets inside content box */
+        list-style-position: inside;
     }
 }
-@media (max-width: 576px) { /* Mobile devices */
+@media (max-width: 576px) {
     .experience-item {
-        padding: 1.25rem; /* Reduce padding on smaller screens */
+        padding: 1.25rem;
     }
     .experience-info h3 {
-        font-size: 1.375rem; /* Smaller font for company name */
+        font-size: 1.375rem;
     }
     .experience-info h4 {
-        font-size: 1.125rem; /* Smaller font for job title */
+        font-size: 1.125rem;
     }
     .experience-responsibilities li {
-        font-size: 0.9375rem; /* Smaller font for responsibilities */
+        font-size: 0.9375rem;
     }
 }
 
@@ -637,43 +704,47 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 /************ Contact Css ************/
 .contact {
   background: linear-gradient(90.21deg, var(--gradient-start) -5.91%, var(--gradient-end) 111.58%);
-  padding: 3.75rem 0 12.5rem 0; /* 60px 200px */
-  text-align: center; /* Ensure everything within section is centered */
-}
-
-.contact h2 {
-  font-size: 2.8125rem; /* 45px */
-  font-weight: 700;
-  margin-bottom: 1.875rem; /* 30px */
-  color: var(--text-light);
-}
-
-/* Styling for the new custom message */
-.contact .custom-message {
-  color: var(--text-light);
-  font-size: 1.25rem; /* 20px */
-  line-height: 1.6em;
-  margin: 0 auto 2.5rem auto; /* 40px, Adjust spacing below the message */
-  width: 90%; /* Take more width on smaller screens */
-  max-width: 50rem; /* 800px, Max width for readability */
+  padding: 3.75rem 0 12.5rem 0;
   text-align: center;
 }
 
-/* Styling for the contact details container */
+.contact h2 {
+  font-size: 2.8125rem;
+  font-weight: 700;
+  margin-bottom: 1.875rem;
+  color: var(--text-light);
+}
+
+.contact .custom-message {
+  color: var(--text-light);
+  font-size: 1.25rem;
+  line-height: 1.6em;
+  margin: 0 auto 2.5rem auto;
+  width: 90%;
+  max-width: 50rem;
+  text-align: center;
+  opacity: 0.9; /* Slightly faded for softer look */
+}
+
 .contact .contact-details {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 1.25rem; /* 20px */
-  padding: 1.875rem 2.5rem; /* 30px 40px */
-  display: inline-block; /* To shrink background to content width */
-  text-align: left; /* Align text within the block */
-  margin-top: 1.875rem; /* 30px, Space above the contact details */
-  max-width: 37.5rem; /* 600px, Example max-width */
-  width: 100%; /* Ensure it takes full width on small screens */
+  background: rgba(255, 255, 255, 0.15); /* Slightly more opaque */
+  border-radius: 1.25rem;
+  padding: 1.875rem 2.5rem;
+  display: inline-block;
+  text-align: left;
+  margin-top: 1.875rem;
+  max-width: 37.5rem;
+  width: 100%;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  transition: box-shadow var(--transition-speed); /* Add transition */
+}
+.contact .contact-details:hover {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); /* Lifted shadow on hover */
 }
 
 .contact .contact-details p {
-  font-size: 1.125rem; /* 18px */
-  margin-bottom: 0.625rem; /* 10px */
+  font-size: 1.125rem;
+  margin-bottom: 0.625rem;
   color: var(--text-light);
   letter-spacing: 0.05em;
   line-height: 1.5em;
@@ -687,14 +758,14 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 .contact .contact-details p strong {
   color: var(--text-light);
-  margin-right: 0.5rem; /* 8px */
+  margin-right: 0.5rem;
   font-weight: 700;
 }
 
 .contact .contact-details p a {
   color: var(--text-light);
   text-decoration: underline;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, text-decoration var(--transition-speed);
 }
 
 .contact .contact-details p a:hover {
@@ -704,35 +775,35 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 /************ Footer Css ************/
 .footer {
-  padding: 0 0 3.125rem 0; /* 50px */
+  padding: 0 0 3.125rem 0;
   background-image: url('./assets/img/footer-bg.png');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
 }
-.newsletter-bx { /* Removed from Footer.js, but keeping styles if it's reinstated */
+.newsletter-bx { /* Styles kept in case it's added back */
   background: var(--text-light);
-  border-radius: 3.4375rem; /* 55px */
+  border-radius: 3.4375rem;
   color: var(--bg-dark);
-  padding: 5.3125rem 7.8125rem; /* 85px 125px */
-  margin-bottom: 5rem; /* 80px */
-  margin-top: -7.625rem; /* -122px */
+  padding: 5.3125rem 7.8125rem;
+  margin-bottom: 5rem;
+  margin-top: -7.625rem;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
 }
 .newsletter-bx h3 {
   font-weight: 700;
-  letter-spacing: 0.03125em; /* 0.5px */
+  letter-spacing: 0.03125em;
   line-height: 1.2em;
 }
 .new-email-bx {
   background: var(--text-light);
-  padding: 0.3125rem; /* 5px */
-  border-radius: 1.25rem; /* 20px */
+  padding: 0.3125rem;
+  border-radius: 1.25rem;
   position: relative;
   z-index: 0;
   display: flex;
   align-items: center;
 }
-
 .new-email-bx::after {
   content: "";
   background: var(--text-light);
@@ -750,35 +821,82 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   font-weight: 500;
   background: transparent;
   border: 0;
-  padding: 0 0.9375rem; /* 15px */
+  padding: 0 0.9375rem;
 }
 .new-email-bx button {
   background: linear-gradient(90.21deg, var(--gradient-start) -5.91%, var(--gradient-end) 111.58%);
-  padding: 1.25rem 4.0625rem; /* 20px 65px */
+  padding: 1.25rem 4.0625rem;
   color: var(--text-light);
   font-weight: 500;
   letter-spacing: 0.03125em;
-  border-radius: 1.125rem; /* 18px */
+  border-radius: 1.125rem;
+  transition: opacity var(--transition-speed);
 }
+.new-email-bx button:hover {
+    opacity: 0.9;
+}
+
 .footer img {
-  width: 80px; /* Adjusted to a more reasonable fixed width for a logo in the footer */
+  width: 70px; /* Adjusted for a slightly smaller logo in the footer */
   height: auto;
+  opacity: 0.8; /* Slightly faded logo */
+  transition: opacity var(--transition-speed);
+}
+.footer img:hover {
+    opacity: 1;
 }
 .footer p {
   font-weight: 400;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
   color: var(--text-muted);
   letter-spacing: 0.03125em;
-  margin-top: 1.25rem; /* 20px */
+  margin-top: 1.25rem;
 }
 
 /* Responsive adjustments for overall layout */
-@media (max-width: 768px) {
+@media (max-width: 1200px) { /* Laptops and smaller desktops */
+    .navbar-nav .nav-link.navbar-link {
+        padding: 0 1rem;
+        font-size: 1rem;
+    }
+    .social-icon {
+        margin-left: 0.5rem;
+        gap: 0.3rem;
+    }
+    .navbar-text button {
+        margin-left: 1rem;
+    }
+}
+
+@media (max-width: 992px) { /* Tablets and smaller desktops */
+    .navbar-collapse {
+        background-color: var(--bg-dark);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-top: 0.5rem;
+    }
+    .navbar-nav {
+        margin-bottom: 1rem;
+    }
+    .navbar-text {
+        justify-content: center;
+        width: 100%;
+    }
+    .navbar-text button {
+        margin-left: 0;
+        width: 100%; /* Full width button in collapsed menu */
+    }
+
+    .banner {
+        padding-top: 10rem; /* Adjusted padding for smaller screens */
+        min-height: auto; /* Allow height to adjust */
+    }
     .banner h1 {
-        font-size: 2.8rem; /* Smaller on tablets */
+        font-size: 2.8rem;
     }
     .banner p {
         font-size: 1rem;
+        max-width: 90%;
     }
     .skill-bx, .project, .services, .contact {
         padding-left: 1rem;
@@ -789,13 +907,23 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     }
     .skill p, .description-text {
         font-size: 1rem;
-        width: 90%; /* Take more width on smaller screens */
+        width: 90%;
+    }
+    .skill-item {
+        min-height: 8rem;
+    }
+    .proj-imgbx {
+        margin-bottom: 1rem;
+    }
+    .proj-imgbx img, .proj-imgbx::before {
+        height: 10rem; /* Smaller image height for projects */
     }
     .proj-txtx h4 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     .proj-txtx span {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
+        max-height: 5rem;
     }
     .contact .contact-details {
         padding: 1.5rem;
@@ -808,65 +936,140 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     }
 }
 
-@media (max-width: 480px) {
-    .navbar-text button {
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
-        margin-left: 0; /* Remove margin on very small screens */
-    }
-    nav.navbar .navbar-nav .nav-link.navbar-link {
-        padding: 0 15px; /* Reduce padding for smaller screens */
-        font-size: 0.9rem;
+@media (max-width: 768px) { /* Larger mobile and small tablets */
+    .banner {
+        padding-top: 8rem;
+        padding-bottom: 4rem;
     }
     .banner h1 {
-        font-size: 2.2rem; /* Even smaller on mobile */
-    }
-    .banner p {
-        font-size: 0.9rem;
+        font-size: 2.4rem;
+        margin-bottom: 1rem;
     }
     .banner button {
         font-size: 1rem;
         margin-top: 2rem;
+        padding: 0.6rem 1.2rem;
     }
     .skill-bx {
-        padding: 2rem 1rem; /* Reduce padding */
-        margin-top: -3rem; /* Adjust overlap */
+        padding: 2.5rem 1.5rem;
+        margin-top: -2.5rem;
     }
     .skill h2, .project h2, .services h2, .contact h2 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     .skill p, .description-text {
-        width: 95%; /* Almost full width */
+        width: 95%;
+        margin-bottom: 2rem;
     }
     .skill-list-container {
-        gap: 1rem; /* Smaller gap on mobile */
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Allow smaller items */
+        gap: 1rem;
+    }
+    .skill-item h5 {
+        font-size: 1.2rem;
+    }
+    .experience-info h3 {
+        font-size: 1.4rem;
+    }
+    .experience-info h4 {
+        font-size: 1.1rem;
+    }
+    .experience-responsibilities li {
+        font-size: 0.95rem;
+    }
+    .contact .custom-message {
+        width: 95%;
+        font-size: 0.95rem;
+    }
+    .footer img {
+        width: 50px;
+    }
+    .footer p {
+        font-size: 0.8rem;
+    }
+    .social-icon {
+        flex-wrap: wrap; /* Allow icons to wrap if needed */
+        justify-content: center;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) { /* Small mobile devices */
+    .navbar-brand {
+        max-width: 70px; /* Smaller logo on very small screens */
+    }
+    .navbar-text button {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    .banner {
+        padding-top: 6rem;
+        padding-bottom: 3rem;
+    }
+    .banner h1 {
+        font-size: 2rem;
+    }
+    .banner p {
+        font-size: 0.9rem;
+        line-height: 1.5em;
+    }
+    .banner button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+    .skill-bx {
+        padding: 1.5rem 0.8rem;
+        margin-top: -2rem;
+    }
+    .skill h2, .project h2, .services h2, .contact h2 {
+        font-size: 1.6rem;
+    }
+    .skill p, .description-text {
+        font-size: 0.9rem;
+    }
+    .skill-list-container {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+        gap: 0.8rem;
     }
     .skill-item {
-        min-height: 7rem; /* Reduce min-height */
+        min-height: 7rem;
+        padding: 1rem;
     }
     .skill-item h5 {
         font-size: 1.1rem;
     }
-    .proj-imgbx img {
-        height: 10rem; /* Smaller image height */
+    .proj-imgbx img, .proj-imgbx::before {
+        height: 8rem; /* Even smaller image height for projects */
+    }
+    .proj-txtx {
+        padding: 0.8rem 1rem 1rem;
+    }
+    .proj-txtx h4 {
+        font-size: 1.2rem;
+    }
+    .proj-txtx span {
+        font-size: 0.8rem;
+        max-height: 4.5rem; /* Further reduce max-height if needed */
+    }
+    .experience-item {
+        padding: 1rem;
+    }
+    .experience-info h3 {
+        font-size: 1.2rem;
+    }
+    .experience-info h4 {
+        font-size: 1rem;
+    }
+    .experience-responsibilities li {
+        font-size: 0.85rem;
     }
     .contact .custom-message {
-        width: 95%;
+        font-size: 0.85rem;
+    }
+    .contact .contact-details {
+        padding: 1rem;
+    }
+    .contact .contact-details p {
         font-size: 0.9rem;
-    }
-    .footer p {
-        font-size: 0.75rem;
-    }
-    .footer img {
-        width: 60px; /* Even smaller logo */
-    }
-    .social-icon a {
-        width: 2rem;
-        height: 2rem;
-        margin-right: 0.3rem;
-    }
-    .social-icon a::before {
-        width: 2rem;
-        height: 2rem;
     }
 }
