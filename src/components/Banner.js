@@ -60,7 +60,6 @@ export const Banner = () => {
                   <p>I’ve been working professionally in tech for over 2 years, mainly focused on crafting powerful backend systems using Java, Spring Boot, REST APIs, and microservices architecture. But I don’t stop there — I also enjoy designing smooth, responsive user interfaces using HTML, CSS, and JavaScript, and occasionally React.js when the frontend calls.</p>
                   <p>I’m someone who thrives in collaborative environments, values clean and testable code, and always stays curious. Whether it’s optimizing performance, learning a new framework, or solving production bugs, I dive into challenges with enthusiasm.</p>
                   <p>Outside of coding, you might find me exploring new technologies, reading about AI, or enjoying time with my family and mountains 🌄.</p>
-                  <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
               </div>}
             </TrackVisibility>
           </Col>
