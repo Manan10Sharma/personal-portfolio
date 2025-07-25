@@ -15,7 +15,7 @@ export const Achievements = () => {
   ];
 
   return (
-    <section className="project" id="achievements"> {/* Reusing 'project' class for general styling, and unique ID */}
+    <section className="project" id="achievements">
       <Container>
         <Row className="justify-content-center">
           <Col size={12} md={10}>
@@ -26,12 +26,13 @@ export const Achievements = () => {
                   <p className="description-text text-center">
                     Highlighting my significant contributions and accomplishments throughout my career journey.
                   </p>
-                  <Row className="skill-list-container"> {/* Reusing skill-list-container for responsive grid */}
+                  <Row className="skill-list-container">
                     {
                       achievements.map((achievement, index) => {
                         return (
                           <div className="skill-item" key={index}>
-                            <div className="skill-percentage">{achievement.value}</div>
+                            {/* Changed class name for specific styling of the award title */}
+                            <div className="achievement-title">{achievement.value}</div>
                             <h5>{achievement.name}</h5>
                           </div>
                         )

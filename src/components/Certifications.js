@@ -12,7 +12,7 @@ export const Certifications = () => {
     {
       value: "Complete MySQL Bootcamp",
       name: "Udemy: Covered data modeling, query optimization, and indexing techniques.",
-      link: "https://drive.google.com/file/d/1KiO_oqK_0OAgltlO9RUjgBLemDLsrYqx/view?usp=drive_link"
+      link: "https://drive.com/file/d/1KiO_oqK_0OAgltlO9RUjgBLemDLsrYqx/view?usp=drive_link"
     },
     {
       value: "Machine Learning & AI Beginners Course",
@@ -37,7 +37,7 @@ export const Certifications = () => {
   ];
 
   return (
-    <section className="project" id="certifications"> {/* Reusing 'project' class for general styling, and unique ID */}
+    <section className="project" id="certifications">
       <Container>
         <Row className="justify-content-center">
           <Col size={12} md={10}>
@@ -48,13 +48,14 @@ export const Certifications = () => {
                   <p className="description-text text-center">
                     A collection of my professional certifications, validating expertise in various technologies and domains.
                   </p>
-                  <Row className="skill-list-container"> {/* Reusing skill-list-container for responsive grid */}
+                  <Row className="skill-list-container">
                     {
                       certificates.map((certificate, index) => {
                         return (
                           <div className="skill-item" key={index}>
                             <a href={certificate.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                              <div className="skill-percentage">{certificate.value}</div>
+                                {/* Changed class name for specific styling of the certificate title */}
+                                <div className="certificate-title">{certificate.value}</div>
                             </a>
                             <h5>{certificate.name}</h5>
                           </div>

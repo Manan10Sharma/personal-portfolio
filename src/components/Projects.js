@@ -1,20 +1,15 @@
 import { Container, Row, Col } from "react-bootstrap";
-// Removed Tab, Nav imports as they are no longer needed
-// import { TabContent, TabPane, Nav } from "react-bootstrap";
-
-// Assuming these image paths are correct for your project images
 import projImg1 from "../assets/img/project-img1.png";
 import projImg2 from "../assets/img/project-img2.png";
 import projImg3 from "../assets/img/project-img3.png";
 import projImg5 from "../assets/img/project-img5.png";
 import projImg6 from "../assets/img/project-img6.png";
-import colorSharp2 from "../assets/img/color-sharp2.png"; // Keep if used for this section's background
-import { ProjectCard } from "./ProjectCard"; // Import the new ProjectCard component
-import 'animate.css'; // Add if not already present
-import TrackVisibility from 'react-on-screen'; // Add if not already present
+import colorSharp2 from "../assets/img/color-sharp2.png";
+import { ProjectCard } from "./ProjectCard";
+import 'animate.css';
+import TrackVisibility from 'react-on-screen';
 
 export const Projects = () => {
-  // Your existing project data
   const projects = [
     {
       title: "MailBot AI – Smart Email Replier",
@@ -49,20 +44,17 @@ export const Projects = () => {
   ];
 
   return (
-    <section className="project" id="projects"> {/* Keep unique ID for this section */}
+    <section className="project" id="projects">
       <Container>
-        <Row className="justify-content-center"> {/* Added justify-content-center */}
-          <Col size={12} md={10}> {/* Adjusted column size */}
+        <Row className="justify-content-center">
+          <Col size={12} md={10}>
             <TrackVisibility>
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__fadeInUp" : ""}>
-                  {/* Main heading for the section */}
                   <h2>My Projects</h2>
-                  <p className="description-text text-center"> {/* Added text-center class */}
+                  <p className="description-text text-center">
                     Explore my hands-on projects, where I've applied robust technical skills to build practical and engaging applications.
                   </p>
-
-                  {/* Projects Section */}
                   <Row>
                     {
                       projects.map((project, index) => {
