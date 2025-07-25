@@ -88,7 +88,7 @@ nav.navbar {
   width: 100%;
   top: 0;
   z-index: 9999;
-  transition:   0.32s ease-in-out;
+  transition:   0.32s ease-in-out;
 }
 nav.navbar.scrolled {
   padding: 0px 0;
@@ -323,15 +323,62 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     line-height: 1.5em;
     margin: 14px 0 75px 0;
 }
-.skill-slider {
-  width: 80%;
-  margin: 0 auto;
-  position: relative;
+
+/* New styles for the skill list display (used also for certificates/achievements) */
+.skill-list-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap to the next line on smaller screens */
+  justify-content: center; /* Centers skill items horizontally */
+  gap: 30px; /* Space between skill items */
+  margin-top: 50px; /* Space from the description text */
 }
-.skill-slider .item img {
-  width: 50%;
-  margin: 0 auto 15px auto;
+
+.skill-item {
+  flex: 0 0 calc(33.333% - 20px); /* Sets width for 3 items per row, considering gap */
+  max-width: 250px; /* Maximum width for each individual skill card */
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05); /* A subtle background for each skill item */
+  border-radius: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
+/* Responsive adjustments for skill items */
+@media (max-width: 992px) { /* Tablets and smaller desktops */
+  .skill-item {
+    flex: 0 0 calc(50% - 20px); /* 2 items per row */
+  }
+}
+
+@media (max-width: 576px) { /* Mobile devices */
+  .skill-item {
+    flex: 0 0 90%; /* 1 item per row, wider on mobile */
+  }
+}
+
+.skill-item .skill-percentage {
+  font-size: 40px;
+  font-weight: 700;
+  color: #fff; /* Fallback color */
+  margin-bottom: 10px;
+  /* Applying the gradient for the percentage text */
+  background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
+  -webkit-background-clip: text; /* For webkit browsers */
+  -webkit-text-fill-color: transparent; /* For webkit browsers */
+  background-clip: text;
+  color: transparent; /* For non-webkit browsers */
+}
+
+.skill-item h5 {
+  font-size: 22px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.4; /* Improve readability for multi-line skill names */
+}
+
 .background-image-left {
   top: 28%;
   position: absolute;
@@ -340,18 +387,18 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   z-index: -4;
 }
 
-/************ Projects Css ************/
-.project {
+/************ Projects, Certifications, Achievements Common CSS ************/
+.project { /* Reused for Projects, Certifications, Achievements */
   padding: 80px 0;
   position: relative;
   background-color: black;
 }
-.project h2 {
+.project h2 { /* Main section heading */
   font-size: 45px;
   font-weight: 700;
   text-align: center;
 }
-.project p {
+.project p { /* Main section description paragraph */
   color: #B8B8B8;
   font-size: 18px;
   letter-spacing: 0.8px;
@@ -360,59 +407,17 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   text-align: center;
   width: 56%;
 }
-.project .nav.nav-pills {
-  width: 72%;
-  margin: 0 auto;
-  border-radius: 50px;
-  background-color: rgb(255 255 255 / 10%);
-  overflow: hidden;
-}
-.project .nav.nav-pills .nav-item {
-  width: 33.33333%;
-}
-.project .nav.nav-pills .nav-link {
-  background-color: transparent;
-  border-radius: 0;
-  padding: 17px 0;
-  color: #fff;
-  width: 100%;
-  font-size: 17px;
-  letter-spacing: 0.8px;
-  font-weight: 500;
-  position: relative;
-  transition: 0.3s ease-in-out;
+
+/* New style for sub-headings within projects, certifications, achievements sections */
+.section-heading {
+  font-size: 35px; /* Slightly smaller than main h2 */
+  font-weight: 700;
   text-align: center;
-  z-index: 0;
+  margin-top: 60px; /* Space above each new section */
+  margin-bottom: 40px; /* Space below each new section */
 }
-.project .nav.nav-pills .nav-link::before {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 100%;
-    background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: 0.3s ease-in-out;
-}
-.project .nav.nav-pills .nav-link.active::before {
-    width: 100% !important;
-}
-.project .nav.nav-pills .nav-link.active {
-    border: 1px solid rgba(255, 255, 255, 1);
-}
-.nav-link#projects-tabs-tab-first {
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 55px 0px 0px 55px;
-}
-.nav-link#projects-tabs-tab-second {
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-}
-.nav-link#projects-tabs-tab-third {
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 0 55px 55px 0;
-}
+
+/* Specific styling for ProjectCard components */
 .proj-imgbx {
   position: relative;
   border-radius: 30px;
@@ -466,76 +471,83 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   z-index: -4;
 }
 
-/************ Projects Css ************/
+/* For consistent paragraph styling under headings in new sections */
+.description-text {
+  color: #B8B8B8;
+  font-size: 18px;
+  letter-spacing: 0.8px;
+  line-height: 1.5em;
+  margin: 14px auto 30px auto; /* Adjust margin as needed */
+  width: 56%; /* Keep consistent with existing projects p */
+  text-align: center; /* Ensure it's centered */
+}
+
+
+/************ Contact Css ************/
 .contact {
   background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
   padding: 60px 0 200px 0;
 }
-.contact img {
+/* Removed .contact img as the image is removed from Contact.js */
+/* .contact img {
   width: 92%;
-}
+} */
 .contact h2 {
   font-size: 45px;
   font-weight: 700;
   margin-bottom: 30px;
 }
-.contact form input, .contact form textarea {
-  width: 100%;
+
+/* Styling for the new custom message */
+.contact .custom-message {
+  color: #fff; /* White color for the message */
+  font-size: 1.2em;
+  line-height: 1.6em;
+  margin: 0 auto 40px auto; /* Adjust spacing below the message */
+  width: 70%; /* Constrain width for better readability */
+  max-width: 800px; /* Max width */
+  text-align: center;
+}
+
+/* Styling for the contact details container */
+.contact .contact-details {
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 20px;
-  color: #fff;
-  margin: 0 0 8px 0;
-  padding: 18px 26px;
-  font-weight: 500;
+  padding: 30px 40px;
+  display: inline-block; /* To shrink background to content width */
+  text-align: left; /* Align text within the block */
+  margin-top: 30px; /* Space above the contact details */
+}
+
+.contact .contact-details p {
   font-size: 18px;
+  margin-bottom: 10px;
+  color: #fff; /* White color for text */
   letter-spacing: 0.8px;
-  transition: 0.3s ease-in-out;
+  line-height: 1.5em;
+  width: auto; /* Override previous width constraints */
+  text-align: left; /* Ensure text aligns left within the container */
 }
-.contact form input:focus, .contact form textarea:focus {
-  background: rgba(255, 255, 255, 1);
-  color: #121212;
+
+.contact .contact-details p:last-child {
+  margin-bottom: 0; /* Remove margin from the last paragraph */
 }
-.contact form input::placeholder, .contact form textarea::placeholder {
-  font-size: 16px;
-  font-weight: 400;
-  color: #fff;
-}
-.contact form input:focus::placeholder, .contact form textarea:focus::placeholder {
-  color: #121212;
-  opacity: 0.8;
-}
-.contact form button {
+
+.contact .contact-details p strong {
+  color: #ffffff; /* Make labels stand out */
+  margin-right: 8px;
   font-weight: 700;
-  color: #000;
-  background-color: #fff;
-  padding: 14px 48px;
-  font-size: 18px;
-  margin-top: 25px;
-  border-radius: 0;
-  position: relative;
-  transition: 0.3s ease-in-out;
 }
-.contact form button span {
-  z-index: 1;
-  position: relative;
+
+.contact .contact-details p a {
+  color: #ffffff; /* White color for links */
+  text-decoration: underline; /* Add underline for links for clarity */
+  transition: color 0.3s ease-in-out;
 }
-.contact form button:hover {
-  color: #fff;
-}
-.contact form button::before {
-  content: "";
-  background: #121212;
-  width: 0;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  transition: 0.3s ease-in-out;
-}
-.contact form button:hover::before {
-  width: 100%;
+
+.contact .contact-details p a:hover {
+  color: #e0e0e0; /* Lighter white on hover */
+  text-decoration: none; /* Remove underline on hover */
 }
 
 /************ Footer Css ************/

@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import logo from '../assets/img/logo.svg';
 import navIcon1 from '../assets/img/nav-icon1.svg';
-import navIcon4 from '../assets/img/nav-icon4.svg';
+import navIcon2 from '../assets/img/nav-icon2.svg';
 import navIcon3 from '../assets/img/nav-icon3.svg';
-import { HashLink } from 'react-router-hash-link';
 import {
-  HashRouter as Router
+  BrowserRouter as Router
 } from "react-router-dom";
 
 export const NavBar = () => {
@@ -46,17 +45,15 @@ export const NavBar = () => {
             <Nav className="ms-auto">
               <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
               <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
-              <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>Projects and Achievements</Nav.Link>
+              <Nav.Link href="#experience" className={activeLink === 'experience' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('experience')}>Experience</Nav.Link> {/* Link to Services/Work Experience */}
+              <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>Projects</Nav.Link>
+              <Nav.Link href="#certifications" className={activeLink === 'certifications' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('certifications')}>Certifications</Nav.Link> {/* New Link */}
+              <Nav.Link href="#achievements" className={activeLink === 'achievements' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('achievements')}>Achievements</Nav.Link> {/* New Link */}
             </Nav>
             <span className="navbar-text">
-              <div className="social-icon">
-                <a href="https://www.linkedin.com/in/manan-sharma-7a827220a/"><img src={navIcon1} alt="Icon" /></a>
-                <a href="https://github.com/Manan10Sharma"><img src={navIcon4} alt="Icon" /></a>
-                <a href="https://www.instagram.com/manansharma2002/"><img src={navIcon3} alt="Icon" /></a>
-              </div>
-              <HashLink to='#connect'>
+              <Nav.Link href="#connect" className={activeLink === 'connect' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('connect')}>
                 <button className="vvd"><span>Let’s Connect</span></button>
-              </HashLink>
+              </Nav.Link>
             </span>
           </Navbar.Collapse>
         </Container>

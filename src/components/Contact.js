@@ -1,89 +1,64 @@
-import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import contactImg from "../assets/img/contact-img.svg";
-import 'animate.css';
-import TrackVisibility from 'react-on-screen';
+// Removed contactImg import as we are removing the image from this section for a cleaner look
+// import contactImg from "../assets/img/contact-img.svg";
+import 'animate.css'; // Assuming you use animate.css for animations
+import TrackVisibility from 'react-on-screen'; // Assuming you use TrackVisibility
 
 export const Contact = () => {
-  const formInitialDetails = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    message: ''
-  }
-  const [formDetails, setFormDetails] = useState(formInitialDetails);
-  const [buttonText, setButtonText] = useState('Send');
-  const [status, setStatus] = useState({});
-
-  const onFormUpdate = (category, value) => {
-      setFormDetails({
-        ...formDetails,
-        [category]: value
-      })
-  }
-
-  const handleSubmit =  (e) => {
-    e.preventDefault();
-    setButtonText("Sending...");
-    setTimeout(() => {
-      setFormDetails(formInitialDetails);
-      setButtonText("Send");
-      setStatus({
-        message : "Form submitted successfully",
-        success : true
-      }
-      )
-    }, 2000);
+  // Define your contact information here
+  const myContactInfo = {
+    email: "manansharma597@gmail.com", // <--- REPLACE WITH YOUR EMAIL
+    github: "https://github.com/Manan10Sharma", // <--- REPLACE WITH YOUR GITHUB PROFILE URL
+    linkedin: "https://www.linkedin.com/in/manan-sharma-7a827220a/", // <--- REPLACE WITH YOUR LINKEDIN PROFILE URL
+    phone: "+91-72319-77000", // <--- REPLACE WITH YOUR PHONE NUMBER
+    Resume: "https://drive.google.com/file/d/1xWR542NBpx7_BVDdo5i-zz7PYbfeWw8K/view"
   };
 
   return (
     <section className="contact" id="connect">
       <Container>
-        <Row className="align-items-center">
-          <Col size={12} md={6}>
+        <Row className="align-items-center justify-content-center"> {/* Added justify-content-center */}
+          <Col size={12} md={10} lg={8} className="text-center"> {/* Centered content */}
             <TrackVisibility>
               {({ isVisible }) =>
-                <img className={isVisible ? "animate__animated animate__zoomIn" : ""} src={contactImg} alt="Contact Us"/>
-              }
+                <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
+                  <h2>Let's Connect</h2> {/* Changed heading to "Let's Connect" */}
+                  
+                  
+
+                  {/* Displaying contact links */}
+                  <div className="contact-details">
+                    <p>
+                      <strong>Email:</strong> <a href={`mailto:${myContactInfo.email}`}>{myContactInfo.email}</a>
+                    </p>
+                    <p>
+                      <strong>GitHub:</strong> <a href={myContactInfo.github} target="_blank" rel="noopener noreferrer">{myContactInfo.github}</a>
+                    </p>
+                    <p>
+                      <strong>LinkedIn:</strong> <a href={myContactInfo.linkedin} target="_blank" rel="noopener noreferrer">{myContactInfo.linkedin}</a>
+                    </p>
+                    <p>
+                      <strong>Phone:</strong> <a href={`tel:${myContactInfo.phone}`}>{myContactInfo.phone}</a>
+                    </p>
+                    <p>
+                      <strong>Resume:</strong> <a href={`tel:${myContactInfo.phone}`}>{myContactInfo.Resume}</a>
+                    </p>
+                  </div>
+                  <br></br><br></br><br></br><br></br>
+                  {/* The new custom message */}
+                  <p className="custom-message">
+                    ◡̈ Thank you for stepping into my world of ideas and code. Every click, every scroll, and every second spent here means a lot! Let’s create something amazing together.
+                  </p>
+
+                </div>}
             </TrackVisibility>
           </Col>
-          <Col size={12} md={6}>
-            <TrackVisibility>
-              {({ isVisible }) =>
-                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <h2>Get In Touch</h2>
-                <form onSubmit={handleSubmit}>
-                  <Row>
-                    <Col size={12} sm={6} className="px-1">
-                      <input type="text" value={formDetails.firstName} placeholder="First Name" onChange={(e) => onFormUpdate('firstName', e.target.value)} />
-                    </Col>
-                    <Col size={12} sm={6} className="px-1">
-                      <input type="text" value={formDetails.lastName} placeholder="Last Name" onChange={(e) => onFormUpdate('lastName', e.target.value)}/>
-                    </Col>
-                    <Col size={12} sm={6} className="px-1">
-                      <input type="email" value={formDetails.email} placeholder="Email Address" onChange={(e) => onFormUpdate('email', e.target.value)} />
-                    </Col>
-                    <Col size={12} sm={6} className="px-1">
-                      <input type="tel" value={formDetails.phone} placeholder="Phone No." onChange={(e) => onFormUpdate('phone', e.target.value)}/>
-                    </Col>
-                    <Col size={12} className="px-1">
-                      <textarea rows="6" value={formDetails.message} placeholder="Message" onChange={(e) => onFormUpdate('message', e.target.value)}></textarea>
-                      <button type="submit"><span>{buttonText}</span></button>
-                    </Col>
-                    {
-                      status.message &&
-                      <Col>
-                        <p className={status.success === false ? "danger" : "success"}>{status.message}</p>
-                      </Col>
-                    }
-                  </Row>
-                </form>
-              </div>}
-            </TrackVisibility>
-          </Col>
+          {/* Removed the image column entirely */}
+          {/* <Col md={6}>
+            <img className={isVisible ? "animate__animated animate__zoomIn" : ""} src={contactImg} alt="Contact Us"/>
+          </Col> */}
         </Row>
       </Container>
     </section>
-  )
-}
+  );
+};

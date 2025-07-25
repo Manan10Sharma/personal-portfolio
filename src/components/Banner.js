@@ -56,7 +56,7 @@ export const Banner = () => {
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <span className="tagline">Welcome to my Portfolio ✮</span>
-                <h1>{`◡̈ Hi! I'm Manan`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Web Developer", "Web Designer", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
+                <h1>{`◡̈ Hi! I'm Manan,`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Web Developer", "Web Designer", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
                   <ul>
                   <p>I’ve been working professionally in tech for over 2 years, mainly focused on crafting powerful backend systems using Java, Spring Boot, REST APIs, and microservices architecture. But I don’t stop there — I also enjoy designing smooth, responsive user interfaces using HTML, CSS, and JavaScript, and occasionally React.js when the frontend calls.</p>
                   <p>I’m someone who thrives in collaborative environments, values clean and testable code, and always stays curious. Whether it’s optimizing performance, learning a new framework, or solving production bugs, I dive into challenges with enthusiasm.</p>
