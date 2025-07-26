@@ -13,33 +13,39 @@ export const Projects = () => {
   const projects = [
     {
       title: "MailBot AI – Smart Email Replier",
-      description: "Built a Chrome Extension that intelligently generates context-aware email replies within Gmail. Designed and developed RESTful APIs using Spring Boot and implemented a tone-based classification system (Professional, Casual, Friendly) for tailored responses. Integrated a responsive frontend using React.js and Material UI, enabling real-time suggestions directly within the Gmail interface.",
+      description: "Built a Chrome Extension that intelligently generates context-aware email replies...",
       imgUrl: projImg1,
+      projectUrl: "https://github.com/Manan10Sharma/MailBot_AI-Smart_Email_Replies" // New property
     },
     {
       title: "Employee Management System",
-      description: "Developed a dynamic web application featuring full CRUD functionality with role-based access control and form validation. Implemented backend logic using Spring MVC and Hibernate, and used Thymeleaf for server-side rendering. Included an intuitive admin panel for managing users and data efficiently.",
+      description: "Developed a dynamic web application featuring full CRUD functionality...",
       imgUrl: projImg2,
+      projectUrl: "https://github.com/Manan10Sharma/Employee-Management-" // New property
     },
     {
       title: "CravZ – Online Food Delivery Platform",
-      description: "Designed and implemented core modules including user authentication, order processing, and admin management. Integrated Spring Security for robust access control and used Thymeleaf to build a responsive, server-rendered UI connected to a MySQL-backed backend.",
+      description: "Designed and implemented core modules including user authentication...",
       imgUrl: projImg3,
+      projectUrl: "https://github.com/Manan10Sharma/CravZ" // New property
     },
     {
       title: "Portfolio Website Development",
-      description: "Built a responsive personal portfolio website using React.js and Bootstrap. Showcases skills, projects, and contact information with smooth animations.",
+      description: "Built a responsive personal portfolio website using React.js and Bootstrap...",
       imgUrl: projImg6,
+      projectUrl: "https://github.com/Manan10Sharma/personal-portfolio" // New property
     },
     {
       title: "MealMate - Advance version of food delivery website",
-      description: "A full-stack food Ordering platform that allows customers to browse restaurants, place orders, and make payments while allowing vendors to manage their restaurant details, orders, and menus. The platform includes secure user authentication and role-based access control to ensure only authorized users can access specific resources.",
+      description: "A full-stack food Ordering platform that allows customers to browse restaurants...",
       imgUrl: projImg3,
+      projectUrl: "https://github.com/Manan10Sharma/MealMate" // New property
     },
     {
       title: "Multithreaded Web server",
       description: "Currently working...",
       imgUrl: projImg5,
+      projectUrl: "#" // New property
     },
   ];
 
