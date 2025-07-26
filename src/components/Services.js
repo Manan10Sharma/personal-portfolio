@@ -11,8 +11,8 @@ export const Services = () => {
       location: "Bengaluru, India",
       responsibilities: [
         "Completed comprehensive training in Java & Python Full Stack Development, including:",
-        "- Core Java, Advanced Java, Spring Boot, SQL, Web Development, Testing.",
-        "- Competitive Programming and software development best practices.",
+        "Core Java, Advanced Java, Spring Boot, SQL, Web Development, Testing.",
+        "Competitive Programming and software development best practices.",
         "Focus on developing full-stack applications and gaining readiness for real-world technology roles.",
       ],
     },
